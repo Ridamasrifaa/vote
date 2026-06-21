@@ -20,36 +20,38 @@ body {
   padding: 40px !important;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
-
-/* --- Grup Kontainer Emoji --- */
-/* --- Grup Kontainer Emoji --- */
 .emoji-group {
   display: flex;
   justify-content: space-between;
-  align-items: stretch; /* Memastikan semua kotak memiliki tinggi yang sama persis */
-  margin-bottom: 35px;
+  align-items: stretch;
   gap: 10px;
-  width: 100%; /* Memastikan grup tidak tumpah ke luar batas form */
+  margin-bottom: 30px;
+  width: 100%; /* Memastikan grup tidak keluar jalur */
 }
 
-/* --- Aturan Dasar Label Emoji --- */
 .emoji-label {
   cursor: pointer;
   display: flex;
-  flex-direction: column; /* Menyusun gambar dan teks secara vertikal */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   border: 2px solid #eee;
   background: #fafafa;
-  padding: 15px 5px; /* Mengurangi padding sisi agar teks punya ruang lebih */
+  padding: 15px 5px;
   transition: all 0.3s ease;
-  border-radius: 20px;
-  flex: 1 1 0; /* KUNCI: Memaksa semua elemen berbagi ruang lebar yang sama rata secara mutlak */
-  font-size: 14px; /* Diperkecil sedikit agar teks "Sangat Puas" lebih proporsional */
-  line-height: 1.2;
-  white-space: normal; /* Menggantikan nowrap agar teks bisa menyesuaikan atau turun baris di layar sempit */
-  margin: 0;
+  border-radius: 16px;
+
+  /* KUNCI PERBAIKAN: Memaksa semua kotak membagi ruang rata */
+  flex: 1 1 0;
+  min-width: 0; /* Menghentikan kotak melebar karena teks panjang */
+
+  /* Aturan agar teks rapi */
+  font-size: 13px;
+  line-height: 1.3;
+  white-space: normal;
+  word-wrap: break-word; /* Memaksa teks yang kepanjangan turun ke baris baru */
+  overflow-wrap: break-word;
 }
 /* --- Efek Saat Emoji Dipilih (Checked) --- */
 .btn-check:checked + .emoji-label {
@@ -66,9 +68,9 @@ body {
 
 /* --- Setingan Gambar Emoji Asli (Desktop) --- */
 .emoji-label img {
-  width: 50px;
+  width: 40px; /* Ukuran diseimbangkan untuk desktop */
   display: block;
-  margin: 0 auto 5px;
+  margin: 0 auto 8px;
   filter: grayscale(100%);
   transition: all 0.3s ease;
 }
