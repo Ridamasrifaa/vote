@@ -22,27 +22,35 @@ body {
 }
 
 /* --- Grup Kontainer Emoji --- */
+/* --- Grup Kontainer Emoji --- */
 .emoji-group {
   display: flex;
   justify-content: space-between;
+  align-items: stretch; /* Memastikan semua kotak memiliki tinggi yang sama persis */
   margin-bottom: 35px;
   gap: 10px;
+  width: 100%; /* Memastikan grup tidak tumpah ke luar batas form */
 }
 
 /* --- Aturan Dasar Label Emoji --- */
 .emoji-label {
   cursor: pointer;
+  display: flex;
+  flex-direction: column; /* Menyusun gambar dan teks secara vertikal */
+  align-items: center;
+  justify-content: center;
   text-align: center;
   border: 2px solid #eee;
   background: #fafafa;
-  padding: 15px 10px;
+  padding: 15px 5px; /* Mengurangi padding sisi agar teks punya ruang lebih */
   transition: all 0.3s ease;
   border-radius: 20px;
-  flex: 1;
-  font-size: 16px;
-  white-space: nowrap; /* Menjaga teks rating tetap satu baris */
+  flex: 1 1 0; /* KUNCI: Memaksa semua elemen berbagi ruang lebar yang sama rata secara mutlak */
+  font-size: 14px; /* Diperkecil sedikit agar teks "Sangat Puas" lebih proporsional */
+  line-height: 1.2;
+  white-space: normal; /* Menggantikan nowrap agar teks bisa menyesuaikan atau turun baris di layar sempit */
+  margin: 0;
 }
-
 /* --- Efek Saat Emoji Dipilih (Checked) --- */
 .btn-check:checked + .emoji-label {
   background-color: #e8f5e9;
