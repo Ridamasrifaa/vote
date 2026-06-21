@@ -10,15 +10,27 @@ body {
   margin: 0;
 }
 
-/* Ukuran maksimal card tetap 500px agar proporsional di layar besar */
+/* Memberi ruang lebih besar agar card tidak terlalu sempit di tablet */
+.container {
+  width: 100%;
+  max-width: 1120px;
+}
+
+/* Ukuran maksimal card dibuat sedikit lebih lebar agar lebih nyaman dibaca di tablet */
 .form-container {
-  max-width: 500px;
+  max-width: 720px;
   width: 100%;
   background: white;
   border-radius: 28px;
   border: none;
-  padding: 40px !important;
+  padding: 44px !important;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #333;
 }
 .emoji-group {
   display: flex;
@@ -38,7 +50,7 @@ body {
   text-align: center;
   border: 2px solid #eee;
   background: #fafafa;
-  padding: 15px 5px;
+  padding: 18px 8px;
   transition: all 0.3s ease;
   border-radius: 16px;
 
@@ -47,11 +59,12 @@ body {
   min-width: 0; /* Menghentikan kotak melebar karena teks panjang */
 
   /* Aturan agar teks rapi */
-  font-size: 13px;
-  line-height: 1.3;
+  font-size: 14px;
+  line-height: 1.4;
   white-space: normal;
   word-wrap: break-word; /* Memaksa teks yang kepanjangan turun ke baris baru */
   overflow-wrap: break-word;
+  font-weight: 500;
 }
 /* --- Efek Saat Emoji Dipilih (Checked) --- */
 .btn-check:checked + .emoji-label {
@@ -68,9 +81,9 @@ body {
 
 /* --- Setingan Gambar Emoji Asli (Desktop) --- */
 .emoji-label img {
-  width: 40px; /* Ukuran diseimbangkan untuk desktop */
+  width: 50px; /* Ukuran diseimbangkan untuk desktop */
   display: block;
-  margin: 0 auto 8px;
+  margin: 0 auto 10px;
   filter: grayscale(100%);
   transition: all 0.3s ease;
 }
@@ -85,8 +98,9 @@ body {
   background-color: #f9f9f9;
   border: 1px solid #e0e0e0;
   border-radius: 15px;
-  padding: 15px;
-  font-size: 16px;
+  padding: 18px;
+  font-size: 18px;
+  line-height: 1.6;
 }
 
 .form-control:focus {
@@ -99,12 +113,14 @@ body {
 /* --- Tombol Kirim --- */
 .btn-custom {
   width: 100%;
-  padding: 15px;
+  padding: 18px;
   background-color: #28a745;
   color: white;
   border: none;
   border-radius: 12px;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
   transition: 0.3s;
 }
 
@@ -140,26 +156,49 @@ body {
    1. MEDIA QUERY: MODE TEGAK (PORTRAIT) TABLET 11 INCI
    ======================================================= */
 @media screen and (max-width: 850px) and (orientation: portrait) {
+  body {
+    align-items: flex-start;
+    padding-top: 48px;
+    padding-bottom: 28px;
+  }
+
   /* Di posisi tegak, ruang ke samping lebih sempit (sekitar 800px ke bawah).
-     Kita kecilkan ukuran dasar emoji agar muat berjejer 5 di dalam card. */
+     Kita besarkan ukuran card dan font untuk tablet dan kemudahan membaca. */
   .form-container {
-    padding: 30px 20px !important;
+    padding: 52px 42px !important;
+    max-width: 100%;
+  }
+
+  .form-container h2 {
+    font-size: 36px;
+    margin-bottom: 28px;
   }
 
   .emoji-group {
-    gap: 6px;
-    margin-bottom: 25px;
+    gap: 10px;
+    margin-bottom: 32px;
   }
 
   .emoji-label {
-    padding: 12px 5px;
-    border-radius: 14px;
-    font-size: 12px; /* Mencegah teks meluber */
+    padding: 18px 8px;
+    border-radius: 16px;
+    font-size: 15px; /* Font lebih jelas */
   }
 
   .emoji-label img {
-    width: 32px; /* Ukuran gambar menyusut agar pas berjejer */
-    margin-bottom: 4px;
+    width: 52px; /* Ukuran gambar lebih besar */
+    margin-bottom: 8px;
+  }
+
+  .form-control {
+    padding: 18px;
+    font-size: 18px;
+    margin-bottom: 20px !important;
+  }
+
+  .btn-custom {
+    padding: 20px;
+    font-size: 18px;
   }
 }
 
@@ -167,31 +206,49 @@ body {
    2. MEDIA QUERY: MODE TIDUR (LANDSCAPE) TABLET 11 INCI
    ======================================================= */
 @media screen and (max-width: 1300px) and (orientation: landscape) {
-  /* Di posisi landscape, lebar layar sangat aman, namun tinggi layar terbatas. 
-     Kita buat form-nya lebih hemat ruang vertikal agar tidak perlu scroll jauh. */
+  body {
+    align-items: flex-start;
+    padding-top: 34px;
+    padding-bottom: 24px;
+  }
+
+  /* Di posisi landscape, lebar layar sangat aman, namun tinggi layar terbatas.
+     Kita buat form-nya lebih nyaman dengan font besar dan spacing baik. */
   .form-container {
-    padding: 25px 30px !important;
+    padding: 44px 56px !important;
+    max-width: 100%;
+  }
+
+  .form-container h2 {
+    font-size: 32px;
+    margin-bottom: 24px;
   }
 
   .emoji-group {
-    gap: 8px;
-    margin-bottom: 20px;
+    gap: 12px;
+    margin-bottom: 30px;
   }
 
   .emoji-label {
-    padding: 10px 5px;
-    border-radius: 14px;
-    font-size: 13px;
+    padding: 16px 10px;
+    border-radius: 16px;
+    font-size: 15px;
   }
 
   .emoji-label img {
-    width: 38px; /* Ukuran gambar seimbang antara desktop & mobile */
-    margin-bottom: 4px;
+    width: 52px; /* Ukuran gambar lebih besar untuk keterbacaan */
+    margin-bottom: 8px;
   }
 
   .form-control {
-    padding: 10px 15px;
-    margin-bottom: 15px !important;
+    padding: 17px 18px;
+    font-size: 17px;
+    margin-bottom: 18px !important;
+  }
+
+  .btn-custom {
+    padding: 18px;
+    font-size: 17px;
   }
 }
 
@@ -215,39 +272,86 @@ body {
    MEDIA QUERY: TABLET & MOBILE (Layar di bawah 768px)
    ======================================================= */
 @media screen and (max-width: 768px) {
+  body {
+    align-items: flex-start;
+    padding-top: 36px;
+    padding-bottom: 24px;
+  }
+
   .form-container {
-    padding: 30px 20px !important; /* Mengurangi ruang kosong di pinggir form */
+    padding: 44px 32px !important; /* Menambah ruang untuk tablet */
+    max-width: 100%;
+  }
+
+  .form-container h2 {
+    font-size: 30px;
+    margin-bottom: 22px;
   }
 
   .emoji-group {
-    gap: 6px; /* Jarak antar kotak dipersempit */
-    margin-bottom: 25px;
+    gap: 10px; /* Jarak antar kotak diperbesar sedikit */
+    margin-bottom: 28px;
   }
 
   .emoji-label {
-    padding: 10px 2px;
-    font-size: 11px; /* Teks mengecil agar muat */
-    border-radius: 12px;
+    padding: 16px 6px;
+    font-size: 14px; /* Teks lebih besar agar mudah dibaca */
+    border-radius: 14px;
+    line-height: 1.4;
   }
 
   .emoji-label img {
-    width: 32px; /* Ikon menyesuaikan ukuran layar tablet/mobile */
-    margin-bottom: 5px;
+    width: 48px; /* Ikon lebih besar untuk tablet */
+    margin-bottom: 8px;
+  }
+
+  .form-control {
+    padding: 18px;
+    font-size: 17px;
+    margin-bottom: 18px !important;
+  }
+
+  .btn-custom {
+    padding: 18px;
+    font-size: 17px;
   }
 }
 
 /* Proteksi Tambahan untuk HP Layar Sangat Kecil (Layar di bawah 450px) */
 @media screen and (max-width: 450px) {
+  .form-container {
+    padding: 25px 20px !important;
+  }
+
+  .form-container h2 {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+
   .emoji-group {
-    gap: 4px;
+    gap: 5px;
+    margin-bottom: 20px;
   }
 
   .emoji-label {
-    font-size: 10px;
-    padding: 8px 2px;
+    font-size: 11px;
+    padding: 10px 3px;
+    border-radius: 10px;
   }
 
   .emoji-label img {
-    width: 28px;
+    width: 32px;
+    margin-bottom: 4px;
+  }
+
+  .form-control {
+    padding: 14px;
+    font-size: 15px;
+    margin-bottom: 12px !important;
+  }
+
+  .btn-custom {
+    padding: 14px;
+    font-size: 15px;
   }
 }
