@@ -1,0 +1,316 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+
+.page-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.main-content {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+}
+
+.sidebar {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+}
+
+.card {
+  background: white;
+  padding: 44px;
+  border-radius: 28px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.main-content .card,
+.sidebar .card {
+  height: 100%;
+  min-height: 100%;
+  flex: 1;
+}
+
+.sidebar .card {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* ini untuk auto scroll */
+  height: 100%; /* ukurannya full 100% */
+  max-height: 550px; /* maksimal tinggi 550px */
+}
+
+h2 {
+  text-align: center;
+  color: #1a1a1a;
+  margin-bottom: 32px;
+  font-weight: 600;
+  font-size: 32px;
+}
+
+.item {
+  margin-bottom: 24px;
+}
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.progress-bg {
+  background: #f0f0f0;
+  height: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.fill-Bosan {
+  background-color: #f44336;
+}
+.fill-Kurang {
+  background-color: #ff9800;
+}
+.fill-Biasa {
+  background-color: #ffc107;
+}
+.fill-Puas {
+  background-color: #8bc34a;
+}
+.fill-Sangat-Puas {
+  background-color: #00c853;
+}
+
+.total-box {
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 2px solid #f9f9f9;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+#loading {
+  text-align: center;
+  color: #888;
+  padding: 20px;
+}
+
+.table-wrap {
+  margin-top: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+  min-height: 0;
+  padding-right: 8px;
+}
+
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.detail-table thead th {
+  text-align: left;
+  background: #f7f8fa;
+  color: #2b2b2b;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 14px 16px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.detail-table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #333;
+  font-size: 14px;
+  vertical-align: top;
+  word-break: break-word;
+}
+
+.detail-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.feedback-cell {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.rating-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  background: #eef6ff;
+  color: #1f4b99;
+}
+
+.empty-state {
+  text-align: center;
+  color: #777;
+  padding: 18px 0 8px;
+}
+
+.section-title {
+  text-align: left;
+  margin: 0 0 18px;
+  font-size: 23px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.table-card {
+  padding: 32px 32px 28px;
+}
+
+@media screen and (max-width: 850px) and (orientation: portrait) {
+  .page-layout {
+    gap: 18px;
+  }
+
+  .card {
+    padding: 52px 42px;
+  }
+
+  .main-content,
+  .sidebar {
+    flex-basis: 100%;
+    display: block;
+  }
+
+  h2 {
+    font-size: 36px;
+    margin-bottom: 28px;
+  }
+
+  .item {
+    margin-bottom: 26px;
+  }
+  .label-row {
+    font-size: 17px;
+  }
+  .progress-bg {
+    height: 18px;
+  }
+  .total-box {
+    font-size: 18px;
+  }
+  .detail-table {
+    table-layout: fixed;
+  }
+
+  .table-card {
+    min-height: auto;
+  }
+
+  .sidebar .card {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 1300px) and (orientation: landscape) {
+  .page-layout {
+    gap: 20px;
+  }
+
+  .card {
+    padding: 46px 56px;
+  }
+
+  .main-content {
+    flex: 1 1 0;
+    display: flex;
+  }
+
+  .sidebar {
+    flex: 1 1 0;
+    display: flex;
+  }
+
+  h2 {
+    font-size: 32px;
+    margin-bottom: 26px;
+  }
+
+  .item {
+    margin-bottom: 24px;
+  }
+  .label-row {
+    font-size: 16px;
+  }
+  .progress-bg {
+    height: 16px;
+  }
+  .detail-table {
+    table-layout: fixed;
+  }
+
+  .table-card {
+    min-height: auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page-layout {
+    gap: 16px;
+  }
+
+  .card {
+    padding: 44px 32px;
+  }
+
+  .main-content,
+  .sidebar {
+    flex-basis: 100%;
+    display: block;
+  }
+
+  h2 {
+    font-size: 30px;
+    margin-bottom: 22px;
+  }
+
+  .item {
+    margin-bottom: 22px;
+  }
+  .label-row {
+    font-size: 15px;
+  }
+  .progress-bg {
+    height: 15px;
+  }
+  .total-box {
+    font-size: 16px;
+  }
+  .detail-table {
+    table-layout: fixed;
+  }
+
+  .sidebar .card {
+    position: static;
+  }
+}
