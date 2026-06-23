@@ -1,319 +1,396 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Hasil Voting</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f0f2f5;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f0f2f5;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+      }
 
+      .page-layout {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        width: 100%;
+        max-width: 1600px;
+        margin: 0 auto;
+        align-items: stretch;
+      }
+
+      .main-content {
+        flex: 1 1 0;
+        min-width: 0;
+        display: flex;
+      }
+
+      .sidebar {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+      }
+
+      .card {
+        background: white;
+        padding: 44px;
+        border-radius: 28px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .main-content .card,
+      .sidebar .card {
+        height: 100%;
+        min-height: 100%;
+        flex: 1;
+      }
+
+      .sidebar .card {
+        display: flex;
+        flex-direction: column;
+      }
+
+      h2 {
+        text-align: center;
+        color: #1a1a1a;
+        margin-bottom: 32px;
+        font-weight: 600;
+        font-size: 32px;
+      }
+
+      .item {
+        margin-bottom: 24px;
+      }
+      .label-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-weight: 600;
+        font-size: 16px;
+        color: #333;
+      }
+
+      .progress-bg {
+        background: #f0f0f0;
+        height: 16px;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+      }
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        transition: width 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+
+      .fill-Bosan {
+        background-color: #f44336;
+      }
+      .fill-Kurang {
+        background-color: #ff9800;
+      }
+      .fill-Biasa {
+        background-color: #ffc107;
+      }
+      .fill-Puas {
+        background-color: #8bc34a;
+      }
+      .fill-Sangat-Puas {
+        background-color: #00c853;
+      }
+
+      .total-box {
+        margin-top: 36px;
+        padding-top: 22px;
+        border-top: 2px solid #f9f9f9;
+        text-align: center;
+        font-size: 17px;
+        font-weight: 600;
+        color: #2b2b2b;
+      }
+      #loading {
+        text-align: center;
+        color: #888;
+        padding: 20px;
+      }
+
+      .table-wrap {
+        margin-top: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex: 1;
+        min-height: 0;
+        padding-right: 8px;
+      }
+
+      .detail-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+      }
+
+      .detail-table thead th {
+        text-align: left;
+        background: #f7f8fa;
+        color: #2b2b2b;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 14px 16px;
+        border-bottom: 1px solid #e8e8e8;
+      }
+
+      .detail-table tbody td {
+        padding: 14px 16px;
+        border-bottom: 1px solid #f0f0f0;
+        color: #333;
+        font-size: 14px;
+        vertical-align: top;
+        word-break: break-word;
+      }
+
+      .detail-table tbody tr:hover {
+        background: #fafafa;
+      }
+
+      .feedback-cell {
+        white-space: normal;
+        word-break: break-word;
+      }
+
+      .rating-badge {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        background: #eef6ff;
+        color: #1f4b99;
+      }
+
+      .empty-state {
+        text-align: center;
+        color: #777;
+        padding: 18px 0 8px;
+      }
+
+      .section-title {
+        text-align: left;
+        margin: 0 0 18px;
+        font-size: 22px;
+        font-weight: 600;
+        color: #1a1a1a;
+      }
+
+      .table-card {
+        padding: 32px 32px 28px;
+      }
+
+      @media screen and (max-width: 850px) and (orientation: portrait) {
         .page-layout {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
-            width: 100%;
-            max-width: 1600px;
-            margin: 0 auto;
-            align-items: stretch;
-        }
-
-        .main-content {
-            flex: 1 1 0;
-            min-width: 0;
-            display: flex;
-        }
-
-        .sidebar {
-            flex: 1;
-            min-width: 0;
-            display: flex;
+          gap: 18px;
         }
 
         .card {
-            background: white;
-            padding: 44px;
-            border-radius: 28px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            width: 100%;
-            box-sizing: border-box;
+          padding: 52px 42px;
         }
 
-        .main-content .card,
-        .sidebar .card {
-            height: 100%;
-            min-height: 100%;
-            flex: 1;
-        }
-
-        .sidebar .card {
-            display: flex;
-            flex-direction: column;
+        .main-content,
+        .sidebar {
+          flex-basis: 100%;
+          display: block;
         }
 
         h2 {
-            text-align: center;
-            color: #1a1a1a;
-            margin-bottom: 32px;
-            font-weight: 600;
-            font-size: 32px;
-        }
-        
-        .item { margin-bottom: 24px; }
-        .label-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 600; font-size: 16px; color: #333; }
-        
-        .progress-bg { background: #f0f0f0; height: 16px; border-radius: 8px; overflow: hidden; position: relative; }
-        .progress-fill { height: 100%; width: 0%; transition: width 1.2s cubic-bezier(0.19, 1, 0.22, 1); }
-        
-        .fill-Bosan { background-color: #f44336; }
-        .fill-Kurang { background-color: #ff9800; }
-        .fill-Biasa { background-color: #ffc107; }
-        .fill-Puas { background-color: #8bc34a; }
-        .fill-Sangat-Puas { background-color: #00c853; }
-        
-        .total-box { margin-top: 36px; padding-top: 22px; border-top: 2px solid #f9f9f9; text-align: center; font-size: 17px; font-weight: 600; color: #2b2b2b; }
-        #loading { text-align: center; color: #888; padding: 20px; }
-
-        .table-wrap {
-            margin-top: 0;
-            overflow-y: auto;
-            overflow-x: hidden;
-            flex: 1;
-            min-height: 0;
-            padding-right: 8px;
+          font-size: 36px;
+          margin-bottom: 28px;
         }
 
+        .item {
+          margin-bottom: 26px;
+        }
+        .label-row {
+          font-size: 17px;
+        }
+        .progress-bg {
+          height: 18px;
+        }
+        .total-box {
+          font-size: 18px;
+        }
         .detail-table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-        }
-
-        .detail-table thead th {
-            text-align: left;
-            background: #f7f8fa;
-            color: #2b2b2b;
-            font-size: 14px;
-            font-weight: 600;
-            padding: 14px 16px;
-            border-bottom: 1px solid #e8e8e8;
-        }
-
-        .detail-table tbody td {
-            padding: 14px 16px;
-            border-bottom: 1px solid #f0f0f0;
-            color: #333;
-            font-size: 14px;
-            vertical-align: top;
-            word-break: break-word;
-        }
-
-        .detail-table tbody tr:hover {
-            background: #fafafa;
-        }
-
-        .feedback-cell {
-            white-space: normal;
-            word-break: break-word;
-        }
-
-        .rating-badge {
-            display: inline-block;
-            padding: 6px 10px;
-            border-radius: 999px;
-            font-size: 13px;
-            font-weight: 600;
-            background: #eef6ff;
-            color: #1f4b99;
-        }
-
-        .empty-state {
-            text-align: center;
-            color: #777;
-            padding: 18px 0 8px;
-        }
-
-        .section-title {
-            text-align: left;
-            margin: 0 0 18px;
-            font-size: 22px;
-            font-weight: 600;
-            color: #1a1a1a;
+          table-layout: fixed;
         }
 
         .table-card {
-            padding: 32px 32px 28px;
+          min-height: auto;
         }
 
-        @media screen and (max-width: 850px) and (orientation: portrait) {
-            .page-layout {
-                gap: 18px;
-            }
+        .sidebar .card {
+          display: block;
+        }
+      }
 
-            .card {
-                padding: 52px 42px;
-            }
-
-            .main-content,
-            .sidebar {
-                flex-basis: 100%;
-                display: block;
-            }
-
-            h2 {
-                font-size: 36px;
-                margin-bottom: 28px;
-            }
-
-            .item { margin-bottom: 26px; }
-            .label-row { font-size: 17px; }
-            .progress-bg { height: 18px; }
-            .total-box { font-size: 18px; }
-            .detail-table { table-layout: fixed; }
-
-            .table-card {
-                min-height: auto;
-            }
-
-            .sidebar .card {
-                display: block;
-            }
+      @media screen and (max-width: 1300px) and (orientation: landscape) {
+        .page-layout {
+          gap: 20px;
         }
 
-        @media screen and (max-width: 1300px) and (orientation: landscape) {
-            .page-layout {
-                gap: 20px;
-            }
-
-            .card {
-                padding: 46px 56px;
-            }
-
-            .main-content {
-                flex: 1 1 0;
-                display: flex;
-            }
-
-            .sidebar {
-                flex: 1 1 0;
-                display: flex;
-            }
-
-            h2 {
-                font-size: 32px;
-                margin-bottom: 26px;
-            }
-
-            .item { margin-bottom: 24px; }
-            .label-row { font-size: 16px; }
-            .progress-bg { height: 16px; }
-            .detail-table { table-layout: fixed; }
-
-            .table-card {
-                min-height: auto;
-            }
+        .card {
+          padding: 46px 56px;
         }
 
-        @media screen and (max-width: 768px) {
-            .page-layout {
-                gap: 16px;
-            }
-
-            .card {
-                padding: 44px 32px;
-            }
-
-            .main-content,
-            .sidebar {
-                flex-basis: 100%;
-                display: block;
-            }
-
-            h2 {
-                font-size: 30px;
-                margin-bottom: 22px;
-            }
-
-            .item { margin-bottom: 22px; }
-            .label-row { font-size: 15px; }
-            .progress-bg { height: 15px; }
-            .total-box { font-size: 16px; }
-            .detail-table { table-layout: fixed; }
-
-            .sidebar .card {
-                position: static;
-            }
+        .main-content {
+          flex: 1 1 0;
+          display: flex;
         }
+
+        .sidebar {
+          flex: 1 1 0;
+          display: flex;
+        }
+
+        h2 {
+          font-size: 32px;
+          margin-bottom: 26px;
+        }
+
+        .item {
+          margin-bottom: 24px;
+        }
+        .label-row {
+          font-size: 16px;
+        }
+        .progress-bg {
+          height: 16px;
+        }
+        .detail-table {
+          table-layout: fixed;
+        }
+
+        .table-card {
+          min-height: auto;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .page-layout {
+          gap: 16px;
+        }
+
+        .card {
+          padding: 44px 32px;
+        }
+
+        .main-content,
+        .sidebar {
+          flex-basis: 100%;
+          display: block;
+        }
+
+        h2 {
+          font-size: 30px;
+          margin-bottom: 22px;
+        }
+
+        .item {
+          margin-bottom: 22px;
+        }
+        .label-row {
+          font-size: 15px;
+        }
+        .progress-bg {
+          height: 15px;
+        }
+        .total-box {
+          font-size: 16px;
+        }
+        .detail-table {
+          table-layout: fixed;
+        }
+
+        .sidebar .card {
+          position: static;
+        }
+      }
     </style>
-</head>
-<body>
-
-<div class="page-layout">
-    <main class="main-content">
+  </head>
+  <body>
+    <div class="page-layout">
+      <main class="main-content">
         <div class="card">
-            <h2>Hasil Voting </h2>
-            <div id="hasil">
-                <p id="loading">Sedang menghitung suara...</p>
-            </div>
-            <div id="total" class="total-box"></div>
+          <h2>Hasil Voting</h2>
+          <div id="hasil">
+            <p id="loading">Sedang menghitung suara...</p>
+          </div>
+          <div id="total" class="total-box"></div>
         </div>
-    </main>
+      </main>
 
-    <aside class="sidebar">
+      <aside class="sidebar">
         <div class="card table-card">
-            <h3 class="section-title">Daftar Feedback</h3>
-            <div class="table-wrap">
-                <div id="feedbackTable"></div>
-            </div>
+          <h3 class="section-title">Daftar Feedback</h3>
+          <div class="table-wrap">
+            <div id="feedbackTable"></div>
+          </div>
         </div>
-    </aside>
+      </aside>
     </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-    const supabaseClient = supabase.createClient(
-        'https://fpxlrisbwrxitqqusnph.supabase.co', 
-        'sb_publishable_ui1Ag7QLz03qxX8MC5EafA_FjDGap0s'
-    );
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+      const supabaseClient = supabase.createClient(
+        "https://fpxlrisbwrxitqqusnph.supabase.co",
+        "sb_publishable_ui1Ag7QLz03qxX8MC5EafA_FjDGap0s",
+      );
 
-    async function hitungRekap() {
+      async function hitungRekap() {
         const { data, error } = await supabaseClient
-            .from('feedbacks')
-            .select('name, feedback_text, rating')
-            .order('id', { ascending: false });
-        
+          .from("feedbacks")
+          .select("name, feedback_text, rating")
+          .order("id", { ascending: false });
+
         if (error) {
-            document.getElementById('hasil').innerHTML = "Gagal memuat data.";
-            document.getElementById('feedbackTable').innerHTML = "";
-            return;
+          document.getElementById("hasil").innerHTML = "Gagal memuat data.";
+          document.getElementById("feedbackTable").innerHTML = "";
+          return;
         }
 
         const totalResponden = data.length;
         const kategori = [
-            {nama: 'Bosan', class: 'Bosan'}, 
-            {nama: 'Kurang', class: 'Kurang'}, 
-            {nama: 'Biasa', class: 'Biasa'}, 
-            {nama: 'Puas', class: 'Puas'}, 
-            {nama: 'Sangat Puas', class: 'Sangat-Puas'}
+          { nama: "Bosan", class: "Bosan" },
+          { nama: "Kurang", class: "Kurang" },
+          { nama: "Biasa", class: "Biasa" },
+          { nama: "Puas", class: "Puas" },
+          { nama: "Sangat Puas", class: "Sangat-Puas" },
         ];
-        
-        const counts = { 'Bosan': 0, 'Kurang': 0, 'Biasa': 0, 'Puas': 0, 'Sangat Puas': 0 };
 
-        data.forEach(item => {
-            if (counts.hasOwnProperty(item.rating)) counts[item.rating]++;
+        const counts = {
+          Bosan: 0,
+          Kurang: 0,
+          Biasa: 0,
+          Puas: 0,
+          "Sangat Puas": 0,
+        };
+
+        data.forEach((item) => {
+          if (counts.hasOwnProperty(item.rating)) counts[item.rating]++;
         });
 
-        let html = '';
-        kategori.forEach(k => {
-           
-            const persentase = totalResponden > 0 ? (counts[k.nama] / totalResponden * 100) : 0;
-            
-            html += `
+        let html = "";
+        kategori.forEach((k) => {
+          const persentase =
+            totalResponden > 0 ? (counts[k.nama] / totalResponden) * 100 : 0;
+
+          html += `
                 <div class="item">
                     <div class="label-row">
                         <span>${k.nama}</span>
@@ -324,13 +401,15 @@
                     </div>
                 </div>`;
         });
-        
-        document.getElementById('hasil').innerHTML = html;
-        document.getElementById('total').innerText = "Total Partisipan: " + totalResponden + " orang";
+
+        document.getElementById("hasil").innerHTML = html;
+        document.getElementById("total").innerText =
+          "Total Partisipan: " + totalResponden + " orang";
 
         if (!data.length) {
-            document.getElementById('feedbackTable').innerHTML = '<p class="empty-state">Belum ada data feedback.</p>';
-            return;
+          document.getElementById("feedbackTable").innerHTML =
+            '<p class="empty-state">Belum ada data feedback.</p>';
+          return;
         }
 
         let tableHtml = `
@@ -344,12 +423,12 @@
                 </thead>
                 <tbody>`;
 
-        data.forEach(item => {
-            const name = item.name || '-';
-            const feedbackText = item.feedback_text || '-';
-            const rating = item.rating || '-';
+        data.forEach((item) => {
+          const name = item.name ? item.name : "Anonim";
+          const feedbackText = item.feedback_text ? item.feedback_text : "Tidak ada pesan kesan";
+          const rating = item.rating || "-";
 
-            tableHtml += `
+          tableHtml += `
                     <tr>
                         <td>${name}</td>
                         <td class="feedback-cell">${feedbackText}</td>
@@ -361,10 +440,10 @@
                 </tbody>
             </table>`;
 
-        document.getElementById('feedbackTable').innerHTML = tableHtml;
-    }
+        document.getElementById("feedbackTable").innerHTML = tableHtml;
+      }
 
-    hitungRekap();
-</script>
-</body>
+      hitungRekap();
+    </script>
+  </body>
 </html>

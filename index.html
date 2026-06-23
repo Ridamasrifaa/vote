@@ -31,8 +31,7 @@
             <label for="r5" class="emoji-label"><img src="assets/img/sangat-puas.png" alt="Sangat Puas" />Sangat Puas</label>
           </div>
 
-          <input type="text" id="name" class="form-control mb-4" placeholder="Masukan Nama Anda..." />
-          <textarea id="feedback" class="form-control mb-3" rows="3" placeholder="Silahkan Pesan Kesan Anda Sampaikan"></textarea>
+          <textarea id="feedback" class="form-control mb-3" rows="3" placeholder="Tulis pesan kesan jika ingin, bisa dikosongkan"></textarea>
           <button type="button" class="btn-custom" onclick="submitData()">Kirim</button>
         </form>
       </div>
@@ -62,7 +61,6 @@
 
       async function submitData() {
         const feedbackValue = document.getElementById("feedback").value.trim();
-        const nameValue = document.getElementById("name").value.trim();
 
         // Mengambil nilai rating dari radio button yang sedang di-check oleh user
         const selectedRadio = document.querySelector('input[name="rating"]:checked');
@@ -74,22 +72,12 @@
           return;
         }
 
-        if (!nameValue) {
-          showAlert("Masukkan nama kamu dulu ya!");
-          return;
-        }
-
-        if (!feedbackValue) {
-          showAlert("Tuliskan masukan atau saranmu ya!");
-          return;
-        }
-
         // Kirim ke database Supabase
         const { error } = await supabaseClient.from("feedbacks").insert([
           {
             rating: selectedRating,
-            feedback_text: feedbackValue,
-            name: nameValue,
+            feedback_text: feedbackValue || null,
+            name: null,
           },
         ]);
 
